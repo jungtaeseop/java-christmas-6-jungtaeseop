@@ -23,6 +23,7 @@
  - 중복 메뉴를 입력한 경우 - validateOverlappingMenu()
 ### 이벤트 배지 - EventBadge
 ### 할인 - Discount
+ - 총주문 금액 10,000원 이상부터 할인 가능 - applyDiscountIfTotalOver10000()
 ### 크리스마스 디데이 할인 - ChristmasDDayDiscount
 ### 평일 할인 - WeekdayDiscount
 ### 주말 할인 - WeekendDiscount
