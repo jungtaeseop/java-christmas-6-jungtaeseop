@@ -138,4 +138,22 @@ public class Order {
     public MenuItem getGiftMenu() {
         return giftMenu;
     }
+
+    public int weekdayDiscount() {
+        return this.orderMenuItems.stream().mapToInt(item -> {
+            if ("디저트".equals(item.getMenu().getMealComponents())) {
+                return 2023 * item.getQuantity();
+            }
+            return 0;
+        }).sum();
+    }
+
+    public int weekendDiscount() {
+        return this.orderMenuItems.stream().mapToInt(item -> {
+            if ("메인".equals(item.getMenu().getMealComponents())) {
+                return 2023 * item.getQuantity();
+            }
+            return 0;
+        }).sum();
+    }
 }
