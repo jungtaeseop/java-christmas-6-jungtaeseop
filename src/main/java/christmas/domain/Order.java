@@ -113,7 +113,8 @@ public class Order {
     private void validateInvalidMenus(List<String> menuNameAndCountList) {
         menuNameAndCountList.forEach(item -> {
             String menuName = item.split("-")[0];
-            boolean isInvalidMenu = Arrays.stream(Menu.values()).noneMatch(key -> menuName.equals(key.getMenuName()));
+            boolean isInvalidMenu = Arrays.stream(Menu.values())
+                    .noneMatch(key -> menuName.equals(key.getMenuName()));
             if (isInvalidMenu) {
                 throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
             }
@@ -125,18 +126,6 @@ public class Order {
                 .map(String::trim)
                 .map(String::valueOf)
                 .collect(Collectors.toList());
-    }
-
-    public List<MenuItem> getOrderMenuItems() {
-        return orderMenuItems;
-    }
-
-    public int getTotalOrderAmount() {
-        return totalOrderAmount;
-    }
-
-    public MenuItem getGiftMenu() {
-        return giftMenu;
     }
 
     public int weekdayDiscount() {
@@ -155,5 +144,23 @@ public class Order {
             }
             return 0;
         }).sum();
+    }
+
+    public boolean applyDiscountIfTotalOver10000() {
+        if (this.totalOrderAmount >= 10000){
+            return true;
+        }
+        return false;
+    }
+    public List<MenuItem> getOrderMenuItems() {
+        return orderMenuItems;
+    }
+
+    public int getTotalOrderAmount() {
+        return totalOrderAmount;
+    }
+
+    public MenuItem getGiftMenu() {
+        return giftMenu;
     }
 }
