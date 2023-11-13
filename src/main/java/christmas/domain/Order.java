@@ -16,8 +16,6 @@ import java.util.stream.Collectors;
 public class Order {
 
     private final List<MenuItem> orderMenuItems;
-    private final int totalOrderAmount; // 총주문 금액
-    private final MenuItem giftMenu;  // 증정 메뉴
 
     public Order(String menuAndCount) {
         validateMenuFormat(menuAndCount);
@@ -27,29 +25,6 @@ public class Order {
         validateBeverageOnlyOrder(menuNameAndCountList);
         validateOverlappingMenu(menuNameAndCountList);
         this.orderMenuItems = createOrderMenuItems(menuNameAndCountList);
-        this.totalOrderAmount = createTotalOrderAmount(menuNameAndCountList);
-        this.giftMenu = createGiftMenu(totalOrderAmount);
-    }
-
-    private MenuItem createGiftMenu(int totalOrderAmount) {
-        if (totalOrderAmount >= 120000) {
-            return new MenuItem("샴페인", 1);
-        }
-        return null;
-    }
-
-    private Integer createTotalOrderAmount(List<String> menuNameAndCountList) {
-        return menuNameAndCountList.stream().mapToInt(item -> {
-            String[] menuAndCount = item.split("-");
-            String menu = menuAndCount[0];
-            Integer quantity = Integer.valueOf(menuAndCount[1]);
-            Integer menuPrice = stream(Menu.values())
-                    .filter(key -> menu.equals(key.getMenuName()))
-                    .map(key -> key.getMenuPrice())
-                    .findFirst()
-                    .orElseThrow(() -> new IllegalArgumentException("[ERROR] 존재하지 않는 메뉴입니다."));
-            return menuPrice * quantity;
-        }).sum();
     }
 
     private List<MenuItem> createOrderMenuItems(List<String> menuNameAndCountList) {
@@ -147,20 +122,22 @@ public class Order {
     }
 
     public boolean applyDiscountIfTotalOver10000() {
-        if (this.totalOrderAmount >= 10000){
+        if (totalOrderAmount() >= 10000) {
             return true;
         }
         return false;
     }
+
+    public int totalOrderAmount() {
+        return this.orderMenuItems.stream()
+                .mapToInt(item -> {
+                    return item.getQuantity() * item.getMenu().getMenuPrice();
+                })
+                .sum();
+    }
+
     public List<MenuItem> getOrderMenuItems() {
         return orderMenuItems;
     }
 
-    public int getTotalOrderAmount() {
-        return totalOrderAmount;
-    }
-
-    public MenuItem getGiftMenu() {
-        return giftMenu;
-    }
 }

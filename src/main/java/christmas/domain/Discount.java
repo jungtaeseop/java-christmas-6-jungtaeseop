@@ -10,4 +10,12 @@ public class Discount {
         this.eventName = eventName;
         this.discountAmount = discountAmount;
     }
+
+    public String getEventName() {
+        return eventName;
+    }
+
+    public int getDiscountAmount() {
+        return discountAmount;
+    }
 }

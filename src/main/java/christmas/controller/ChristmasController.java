@@ -14,12 +14,15 @@ public class ChristmasController {
     public void start() {
         int readDate = inputView.readDate();
         Order order = inputView.readMenuOrder();
+        DiscountFactory discountFactory = new DiscountFactory(readDate,order);
 
         outputView.printMenu(order);
         outputView.printTotalOrderAmount(order);
+
         outputView.printGiftMenu(order);
-
-        DiscountFactory discountFactory = new DiscountFactory(readDate,order);
-
+        outputView.printDiscountDetails(discountFactory);
+        outputView.printTotalDiscountedAmount(discountFactory);
+        outputView.printEstimatedPaymentAmountAfterDiscount(discountFactory, order);
+        outputView.printEventBadge(discountFactory);
     }
 }

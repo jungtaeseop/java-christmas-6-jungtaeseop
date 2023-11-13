@@ -29,13 +29,14 @@ public class DiscountFactory {
             addDiscountForWeekday(calculatedDiscount, order, discountList);
             addDiscountForWeekend(calculatedDiscount, order, discountList);
             addDiscountForSpecialDay(calculatedDiscount, discountList);
+            addDiscountForGiftEvent(calculatedDiscount, order, discountList);
         }
 
         return discountList;
     }
 
     private void addDiscountForDday(CalculatedDiscount calculatedDiscount,
-            List<Discount> discountList) {
+                                    List<Discount> discountList) {
         if (dayOfMonth >= 1 && dayOfMonth <= 25) {
             int ddayDiscount = calculatedDiscount.calculatedDdayDiscount();
             discountList.add(new Discount("크리스마스 디데이 할인", ddayDiscount));
@@ -43,7 +44,7 @@ public class DiscountFactory {
     }
 
     private void addDiscountForWeekday(CalculatedDiscount calculatedDiscount, Order order,
-            List<Discount> discountList) {
+                                       List<Discount> discountList) {
         if (dayOfWeek >= Calendar.SUNDAY && dayOfWeek <= Calendar.THURSDAY) {
             int weekdayDiscount = calculatedDiscount.calculatedWeekdayDiscount(order);
             discountList.add(new Discount("평일 할인", weekdayDiscount));
@@ -51,19 +52,49 @@ public class DiscountFactory {
     }
 
     private void addDiscountForWeekend(CalculatedDiscount calculatedDiscount, Order order,
-            List<Discount> discountList) {
+                                       List<Discount> discountList) {
         if (dayOfWeek >= Calendar.FRIDAY && dayOfWeek <= Calendar.SATURDAY) {
             int weekendDiscount = calculatedDiscount.calculatedWeekendDiscount(order);
             discountList.add(new Discount("주말 할인", weekendDiscount));
         }
     }
 
-    private void addDiscountForSpecialDay(CalculatedDiscount calculatedDiscount,
-            List<Discount> discountList) {
+    private void addDiscountForSpecialDay(CalculatedDiscount calculatedDiscount, List<Discount> discountList) {
         if (dayOfWeek == Calendar.SUNDAY || dayOfMonth == 25) {
             int specialDiscount = calculatedDiscount.calculatedSpecialDiscount();
             discountList.add(new Discount("특별 할인", specialDiscount));
         }
     }
 
+    private void addDiscountForGiftEvent(CalculatedDiscount calculatedDiscount, Order order, List<Discount> discountList) {
+        if (order.totalOrderAmount() >= 120000) {
+            int giftEventDiscount = calculatedDiscount.calculatedGiftEventDiscount(order);
+            discountList.add(new Discount("증정 이벤트", giftEventDiscount));
+        }
+    }
+
+    public Integer totalDiscountAmount() {
+        return this.discounts.stream()
+                .mapToInt(item -> item.getDiscountAmount())
+                .sum();
+    }
+
+    public String eventBadge() {
+        Integer totalBenefitAmount = totalDiscountAmount();
+
+        if (Math.abs(totalBenefitAmount) >= 20000) {
+            return "산타";
+        }
+        if (Math.abs(totalBenefitAmount) >= 10000) {
+            return "트리";
+        }
+        if (Math.abs(totalBenefitAmount) >= 5000) {
+            return "별";
+        }
+        return "없음";
+    }
+
+    public List<Discount> getDiscounts() {
+        return discounts;
+    }
 }

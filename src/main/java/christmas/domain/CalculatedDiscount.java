@@ -46,4 +46,12 @@ public class CalculatedDiscount {
         }
         return 0;
     }
+
+    public int calculatedGiftEventDiscount(Order order) {
+        int totalOrderAmount = order.totalOrderAmount();
+        if (totalOrderAmount >= 120000) {
+            return -25000;
+        }
+        return 0;
+    }
 }
