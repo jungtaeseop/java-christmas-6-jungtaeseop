@@ -19,7 +19,6 @@ public class DiscountFactory {
         this.discounts = createDiscountClassification(order);
     }
 
-
     public List<Discount> createDiscountClassification(Order order) {
         List<Discount> discountList = new ArrayList<>();
         CalculatedDiscount calculatedDiscount = new CalculatedDiscount(this.dayOfMonth);
