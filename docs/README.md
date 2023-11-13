@@ -19,6 +19,7 @@
  - 주말 할인이면 메인 메뉴를 찾아서 계산하는 함수 - weekendDiscount()
 ### 이벤트 배지 - EventBadge
 ### 할인 - Discount
+ - 할인 이름과 할인 금액을 저장하는 함수
 ### 할인 계산 - CalculatedDiscount
  - 크리스마스 디데이 할인을 계산 - calculatedDdayDiscount() 
  - 평일 할인을 계산 - calculatedWeekdayDiscount()
@@ -26,7 +27,7 @@
  - 특별 할인을 계산 - calculatedSpecialDiscount()
 ### 할인 목록 생성 - DiscountFactory
  - 할인 종류를 구분하여 리스트를 만드는 함수 - createDiscountClassification()
- - 디데이 할인 구분하여 계산하고 discount List에 추가하는 함수 - addDiscountForDday()
- - 평일 할인 구분하여 계산하고 discount List에 추가하는 함수 - addDiscountForWeekday()
- - 주말 할인 구분하여 계산하고 discount List에 추가하는 함수 - addDiscountForWeekend()
- - 특별 할인 구분하여 계산하고 discount List에 추가하는 함수 - addDiscountForSpecialDay()
+ - 디데이 할인 구분하여 계산하고 discount 목록에 추가하는 함수 - addDiscountForDday()
+ - 평일 할인 구분하여 계산하고 discount 목록에 추가하는 함수 - addDiscountForWeekday()
+ - 주말 할인 구분하여 계산하고 discount 목록에 추가하는 함수 - addDiscountForWeekend()
+ - 특별 할인 구분하여 계산하고 discount 목록에 추가하는 함수 - addDiscountForSpecialDay()
