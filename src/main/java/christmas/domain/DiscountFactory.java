@@ -80,15 +80,15 @@ public class DiscountFactory {
     }
 
     public String eventBadge() {
-        Integer totalBenefitAmount = totalDiscountAmount();
+        Integer totalDiscountAmount = totalDiscountAmount();
 
-        if (Math.abs(totalBenefitAmount) >= 20000) {
+        if (Math.abs(totalDiscountAmount) >= 20000) {
             return "산타";
         }
-        if (Math.abs(totalBenefitAmount) >= 10000) {
+        if (Math.abs(totalDiscountAmount) >= 10000) {
             return "트리";
         }
-        if (Math.abs(totalBenefitAmount) >= 5000) {
+        if (Math.abs(totalDiscountAmount) >= 5000) {
             return "별";
         }
         return "없음";
