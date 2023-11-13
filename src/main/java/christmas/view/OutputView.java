@@ -43,7 +43,7 @@ public class OutputView {
     }
 
     public void printDiscountDetails(DiscountFactory discountFactory) {
-        System.out.println("<혜택 내역>");
+        System.out.println(BENEFIT_DETAILS.getMessage());
 
         if (discountFactory.getDiscounts() == null || discountFactory.getDiscounts().isEmpty()) {
             System.out.println("없음");
@@ -58,18 +58,18 @@ public class OutputView {
     }
 
     public void printTotalDiscountedAmount(DiscountFactory discountFactory) {
-        System.out.println("<총혜택 금액>");
+        System.out.println(TOTAL_BENEFIT_AMOUNT.getMessage());
         System.out.println(discountFactory.totalDiscountAmount() + "원");
         System.out.println();
     }
 
     public void printEstimatedPaymentAmountAfterDiscount(DiscountFactory discountFactory, Order order) {
-        System.out.println("<할인 후 예상 결제 금액>");
+        System.out.println(ESTIMATED_PAYMENT_AMOUNT_DISCOUNT.getMessage());
         System.out.println(order.totalOrderAmount() + discountFactory.totalDiscountAmount() + "원");
     }
 
     public void printEventBadge(DiscountFactory discountFactory) {
-        System.out.println("<12월 이벤트 배지>");
+        System.out.println(EVENT_BADGE.getMessage());
         System.out.println(discountFactory.eventBadge());
     }
 }
