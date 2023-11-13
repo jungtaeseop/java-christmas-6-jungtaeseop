@@ -1,19 +1,11 @@
-- 크리스마스 디데이 할인 날짜 할인 : 1000 + (( n(날짜) - 1) * 100)
-- 평일 할인(일요일~목요일): 평일에는 디저트 메뉴를 메뉴 1개당 2,023원 할인
-- 주말 할인(금요일, 토요일): 주말에는 메인 메뉴를 메뉴 1개당 2,023원 할인
-- 특별 할인: 이벤트 달력에 별이 있으면 총주문 금액에서 1,000원 할인
-- 증정 이벤트: 할인 전 총주문 금액이 12만 원 이상일 때, 샴페인 1개 증정
-- 이벤트 기간: '크리스마스 디데이 할인'을 제외한 다른 이벤트는 2023.12.1 ~ 2023.12.31 동안 적용
-
-
-## 도메인
+# 도메인
 
 ### 예약- Reservation
  - 방문할 날짜가 1 이상 31 이하의 숫자가 아닌 경우 체크 - validateNumberRange()
 ### 메뉴 - menu
- - 메뉴판
+ - 기본 메뉴가 세팅되어 있습니다.
 ### 메뉴아이템 - menuItem
- - 메뉴 와 개수를 가지고 있음
+ - 메뉴와 개수를 저장하고 있습니다.
 ### 주문 - Order
  - 고객이 메뉴판에 없는 메뉴를 입력하는 경우 - validateInvalidMenus()
  - 메뉴의 개수는 1 이상의 숫자만 입력되도록 - validateMenuCount()
@@ -21,10 +13,20 @@
  - 주문 시 음료만 주문할 수 없습니다 - validateBeverageOnlyOrder()
  - 메뉴 형식이 예시와 다른 경우 - validateMenuFormat()
  - 중복 메뉴를 입력한 경우 - validateOverlappingMenu()
+ - [메뉴-개수] 를 콤마 단위로 나누는 함수 - cutMenuNameAndCount()
+ - 총주문 금액 10,000원 이상부터 할인 가능 - applyDiscountIfTotalOver10000()
+ - 평일 할인이면 디저트 메뉴를 찾아서 계산하는 함수 - weekdayDiscount()
+ - 주말 할인이면 메인 메뉴를 찾아서 계산하는 함수 - weekendDiscount()
 ### 이벤트 배지 - EventBadge
 ### 할인 - Discount
- - 총주문 금액 10,000원 이상부터 할인 가능 - applyDiscountIfTotalOver10000()
-### 크리스마스 디데이 할인 - ChristmasDDayDiscount
-### 평일 할인 - WeekdayDiscount
-### 주말 할인 - WeekendDiscount
-### 특별 할인 - SpecialDiscount
+### 할인 계산 - CalculatedDiscount
+ - 크리스마스 디데이 할인을 계산 - calculatedDdayDiscount() 
+ - 평일 할인을 계산 - calculatedWeekdayDiscount()
+ - 주말 할인을 계산 - calculatedWeekendDiscount()
+ - 특별 할인을 계산 - calculatedSpecialDiscount()
+### 할인 목록 생성 - DiscountFactory
+ - 할인 종류를 구분하여 리스트를 만드는 함수 - createDiscountClassification()
+ - 디데이 할인 구분하여 계산하고 discount List에 추가하는 함수 - addDiscountForDday()
+ - 평일 할인 구분하여 계산하고 discount List에 추가하는 함수 - addDiscountForWeekday()
+ - 주말 할인 구분하여 계산하고 discount List에 추가하는 함수 - addDiscountForWeekend()
+ - 특별 할인 구분하여 계산하고 discount List에 추가하는 함수 - addDiscountForSpecialDay()
