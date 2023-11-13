@@ -80,4 +80,30 @@ class OrderTest {
                 .hasMessageContaining("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
     }
 
+    @DisplayName("총주문 금액")
+    @Test
+    void 총주문_금액() {
+        //given
+        String menu = "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1";
+        Order order = new Order(menu);
+        //when
+        int totalOrderAmount = order.totalOrderAmount();
+
+        //then
+        assertThat(totalOrderAmount).isEqualTo(142000);
+    }
+
+
+    @DisplayName("총주문 금액 만원 이상부터 이벤트 적용 Test")
+    @Test
+    void 총주문_금액_만원_이상부터_이벤트_적용_Test() {
+        //given
+        String menu = "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1";
+        Order order = new Order(menu);
+        //when
+        boolean eventApply = order.applyDiscountIfTotalOver10000();
+
+        //then
+        assertThat(eventApply).isEqualTo(true);
+    }
 }

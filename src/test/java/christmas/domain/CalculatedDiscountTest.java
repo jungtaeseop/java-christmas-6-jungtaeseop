@@ -67,4 +67,20 @@ class CalculatedDiscountTest {
         assertThat(specialDiscount).isEqualTo(-1000);
     }
 
+    @DisplayName("증정 이벤트 할인")
+    @Test
+    void 증정_이벤트_할인() {
+        //given
+        String date = "25";
+        String menu = "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1";
+        Order order = new Order(menu);
+        CalculatedDiscount calculatedDiscount = new CalculatedDiscount(Integer.valueOf(date));
+
+        //when
+        int giftEventDiscount = calculatedDiscount.calculatedGiftEventDiscount(order);
+
+        //then
+        assertThat(giftEventDiscount).isEqualTo(-25000);
+    }
+
 }
