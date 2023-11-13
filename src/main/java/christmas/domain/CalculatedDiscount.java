@@ -10,7 +10,7 @@ public class CalculatedDiscount {
         this.calendar.set(2023, Calendar.DECEMBER, date);
     }
 
-    public int getDdayDiscount() {
+    public int calculatedDdayDiscount() {
         int dayOfMonth = this.calendar.get(Calendar.DAY_OF_MONTH);
 
         if (dayOfMonth >= 1 && dayOfMonth <= 25) {
@@ -19,7 +19,7 @@ public class CalculatedDiscount {
         return 0;
     }
 
-    public int getWeekdayDiscount(Order order) {
+    public int calculatedWeekdayDiscount(Order order) {
         int dayOfWeek = this.calendar.get(Calendar.DAY_OF_WEEK);
 
         if (dayOfWeek >= Calendar.SUNDAY && dayOfWeek <= Calendar.THURSDAY) {
@@ -28,7 +28,7 @@ public class CalculatedDiscount {
         return 0;
     }
 
-    public int getWeekendDiscount(Order order) {
+    public int calculatedWeekendDiscount(Order order) {
         int dayOfWeek = this.calendar.get(Calendar.DAY_OF_WEEK);
 
         if (dayOfWeek >= Calendar.FRIDAY && dayOfWeek <= Calendar.SATURDAY) {
@@ -37,7 +37,7 @@ public class CalculatedDiscount {
         return 0;
     }
 
-    public int getSpecialDiscount() {
+    public int calculatedSpecialDiscount() {
         int dayOfWeek = this.calendar.get(Calendar.DAY_OF_WEEK);
         int dayOfMonth = this.calendar.get(Calendar.DAY_OF_MONTH);
 

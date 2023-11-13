@@ -15,7 +15,7 @@ class CalculatedDiscountTest {
         CalculatedDiscount calculatedDiscount = new CalculatedDiscount(Integer.valueOf(date));
 
         //when
-        int ddayDiscount = calculatedDiscount.getDdayDiscount();
+        int ddayDiscount = calculatedDiscount.calculatedDdayDiscount();
 
         //then
         assertThat(ddayDiscount).isEqualTo(-3400);
@@ -31,7 +31,7 @@ class CalculatedDiscountTest {
         CalculatedDiscount calculatedDiscount = new CalculatedDiscount(Integer.valueOf(date));
 
         //when
-        int weekdayDiscount = calculatedDiscount.getWeekdayDiscount(order);
+        int weekdayDiscount = calculatedDiscount.calculatedWeekdayDiscount(order);
 
         //then
         assertThat(weekdayDiscount).isEqualTo(-6069);
@@ -47,7 +47,7 @@ class CalculatedDiscountTest {
         CalculatedDiscount calculatedDiscount = new CalculatedDiscount(Integer.valueOf(date));
 
         //when
-        int weekendDiscount = calculatedDiscount.getWeekendDiscount(order);
+        int weekendDiscount = calculatedDiscount.calculatedWeekendDiscount(order);
 
         //then
         assertThat(weekendDiscount).isEqualTo(-4046);
@@ -61,7 +61,7 @@ class CalculatedDiscountTest {
         CalculatedDiscount calculatedDiscount = new CalculatedDiscount(Integer.valueOf(date));
 
         //when
-        int specialDiscount = calculatedDiscount.getSpecialDiscount();
+        int specialDiscount = calculatedDiscount.calculatedSpecialDiscount();
 
         //then
         assertThat(specialDiscount).isEqualTo(-1000);
