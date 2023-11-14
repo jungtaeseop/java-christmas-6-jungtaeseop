@@ -2,6 +2,7 @@ package christmas.domain;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 public class DiscountFactory {
@@ -85,6 +86,6 @@ public class DiscountFactory {
     }
 
     public List<Discount> getDiscounts() {
-        return discounts;
+        return Collections.unmodifiableList(discounts);
     }
 }
