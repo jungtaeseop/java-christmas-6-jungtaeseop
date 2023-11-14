@@ -15,19 +15,13 @@
  - 메뉴는 한 번에 최대 20개까지만 주문할수 있도록 체크하는 함수 - validateMenuCount()
  - 고객이 메뉴판에 없는 메뉴를 입력하는 경우 - validateInvalidMenus()
  - [메뉴-개수] 를 콤마 단위로 나누는 함수 - cutMenuNameAndCount()
- - 평일 할인이면 디저트 메뉴를 찾아서 계산하는 함수 - weekdayDiscount()
- - 주말 할인이면 메인 메뉴를 찾아서 계산하는 함수 - weekendDiscount()
+ - 디저트 메뉴를 찾아서 계산하는 함수 - weekdayDiscount()
+ - 메인 메뉴를 찾아서 계산하는 함수 - weekendDiscount()
  - 총주문 금액 10,000원 이상부터 할인 가능 - applyDiscountIfTotalOver10000()
  - 총 주문 금액 구하는 함수 - totalOrderAmount()
  - 메뉴아이템 목록을 가져오는 함수 - getOrderMenuItems()
 ### 할인 - Discount
  - 할인 이름과 할인 금액을 저장하는 함수
-### 할인 계산 - CalculatedDiscount
- - 크리스마스 디데이 할인을 계산 - calculatedDdayDiscount() 
- - 평일 할인을 계산 - calculatedWeekdayDiscount()
- - 주말 할인을 계산 - calculatedWeekendDiscount()
- - 특별 할인을 계산 - calculatedSpecialDiscount()
- - 이벤트 할인을 계산 - calculatedGiftEventDiscount()
 ### 할인 목록 생성 - DiscountFactory
  - 할인 종류를 구분하여 리스트를 만드는 함수 - createDiscountClassification()
  - 디데이 할인 구분하여 계산하고 discount 목록에 추가하는 함수 - addDiscountForDday()
