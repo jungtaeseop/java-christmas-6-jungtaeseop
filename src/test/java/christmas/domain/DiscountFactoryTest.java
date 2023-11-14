@@ -15,7 +15,7 @@ class DiscountFactoryTest {
     void 할인_목록_생성_체크() {
         //given
         Integer date = 26;
-        String menu = "티본스테이크-2,바비큐립-1,초코케이크-2,아이스크림-1,레드와인-1";
+        String menu = "초코케이크-2,아이스크림-1,제로콜라-1";
         DiscountFactory discountFactory = new DiscountFactory(date, new Order(menu));
 
         List<Integer> expectedDiscountAmounts = Arrays.asList(-6069);
@@ -39,7 +39,7 @@ class DiscountFactoryTest {
         DiscountFactory discountFactory = new DiscountFactory(date, new Order(menu));
 
         //when //then
-        assertThat(discountFactory.totalDiscountAmount()).isEqualTo(-7169);
+        assertThat(discountFactory.totalDiscountAmount()).isEqualTo(-32169);
     }
 
     @DisplayName("이벤트 배지 체크")
@@ -51,6 +51,105 @@ class DiscountFactoryTest {
         DiscountFactory discountFactory = new DiscountFactory(date, new Order(menu));
 
         //when //then
-        assertThat(discountFactory.eventBadge()).isEqualTo("별");
+        assertThat(discountFactory.eventBadge()).isEqualTo("산타");
+    }
+
+    @DisplayName("크리스마스_디데이_할인")
+    @Test
+    void 크리스마스_디데이_할인() {
+        //given
+        Integer date = 25;
+        String menu = "티본스테이크-2,바비큐립-1,초코케이크-2,아이스크림-1,레드와인-1";
+        DiscountFactory discountFactory = new DiscountFactory(date, new Order(menu));
+        Integer expectedDiscountAmounts = -3400;
+
+        //when
+        Integer ddayDiscount = discountFactory.getDiscounts().stream()
+                .filter(item -> "크리스마스 디데이 할인".equals(item.getEventName()))
+                .map(item -> item.getDiscountAmount())
+                .findFirst()
+                .get();
+
+        //then
+        assertThat(ddayDiscount).isEqualTo(expectedDiscountAmounts);
+    }
+
+    @DisplayName("평일 할인")
+    @Test
+    void 평일_할인() {
+        //given
+        Integer date = 3;
+        String menu = "티본스테이크-1,바비큐립-1,초코케이크-2,아이스크림-1,레드와인-1";
+        DiscountFactory discountFactory = new DiscountFactory(date, new Order(menu));
+        Integer expectedDiscountAmounts = -6069;
+
+        //when
+        int weekdayDiscount = discountFactory.getDiscounts().stream()
+                .filter(item -> "평일 할인".equals(item.getEventName()))
+                .map(item -> item.getDiscountAmount())
+                .findFirst()
+                .get();
+
+        //then
+        assertThat(weekdayDiscount).isEqualTo(expectedDiscountAmounts);
+    }
+
+    @DisplayName("주말_할인")
+    @Test
+    void 주말_할인() {
+        //given
+        Integer date = 1;
+        String menu = "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1";
+        DiscountFactory discountFactory = new DiscountFactory(date, new Order(menu));
+        Integer expectedDiscountAmounts = -4046;
+
+        //when
+        int weekendDiscount = discountFactory.getDiscounts().stream()
+                .filter(item -> "주말 할인".equals(item.getEventName()))
+                .map(item -> item.getDiscountAmount())
+                .findFirst()
+                .get();
+
+        //then
+        assertThat(weekendDiscount).isEqualTo(expectedDiscountAmounts);
+    }
+
+    @DisplayName("특별_할인")
+    @Test
+    void 특별_할인() {
+        //given
+        Integer date = 25;
+        String menu = "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1";
+        DiscountFactory discountFactory = new DiscountFactory(date, new Order(menu));
+        Integer expectedDiscountAmounts = -1000;
+
+        //when
+        int specialDiscount = discountFactory.getDiscounts().stream()
+                .filter(item -> "특별 할인".equals(item.getEventName()))
+                .map(item -> item.getDiscountAmount())
+                .findFirst()
+                .get();
+
+        //then
+        assertThat(specialDiscount).isEqualTo(expectedDiscountAmounts);
+    }
+
+    @DisplayName("증정 이벤트 할인")
+    @Test
+    void 증정_이벤트_할인() {
+        //given
+        Integer date = 25;
+        String menu = "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-2";
+        DiscountFactory discountFactory = new DiscountFactory(date, new Order(menu));
+
+        //when
+        int giftEventDiscount = discountFactory.getDiscounts().stream()
+                .filter(item -> "증정 이벤트".equals(item.getEventName()))
+                .map(item -> item.getDiscountAmount())
+                .findFirst()
+                .get();
+
+        //then
+        assertThat(giftEventDiscount).isEqualTo(-25000);
     }
 }
