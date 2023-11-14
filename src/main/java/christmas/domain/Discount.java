@@ -3,8 +3,8 @@ package christmas.domain;
 import java.util.Calendar;
 
 public class Discount {
-    private String eventName;
-    private int discountAmount;
+    private final String eventName;
+    private final int discountAmount;
 
     public Discount(String eventName, int discountAmount) {
         this.eventName = eventName;
