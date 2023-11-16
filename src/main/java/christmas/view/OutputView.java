@@ -2,7 +2,7 @@ package christmas.view;
 
 import static christmas.view.OutputMessage.*;
 
-import christmas.domain.DiscountFactory;
+import christmas.service.DiscountFactory;
 import christmas.domain.Order;
 import java.text.NumberFormat;
 

@@ -1,6 +1,6 @@
 package christmas.controller;
 
-import christmas.domain.DiscountFactory;
+import christmas.service.DiscountFactory;
 import christmas.domain.Order;
 import christmas.view.InputView;
 import christmas.view.OutputView;
